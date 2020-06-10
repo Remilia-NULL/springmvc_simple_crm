@@ -52,7 +52,7 @@ function check(){
 			 <span id="message">${msg}</span>
 		</font>
 		<%-- 提交后的位置：/WEB-INF/jsp/customer.jsp--%>
-		<form  onsubmit="return check()">
+		<form  onsubmit="return check()" action="/login.action" method="post">
                       &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br /><br />
           账&nbsp;号：<input id="usercode" type="text" name="usercode" />
           <br /><br />
