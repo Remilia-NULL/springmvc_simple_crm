@@ -26,9 +26,9 @@
         <!--连接数据库的url -->
         <property name="url" value="jdbc:mysql://localhost:3306/boot_crm"/>
         <!--连接数据库的用户名 -->
-        <property name="username" value="root"/>
+        <property name="username" value="Spring"/>
         <!--连接数据库的密码 -->
-        <property name="password" value="x5"/>
+        <property name="password" value="123456789Abc="/>
     </bean>
 
     <!-- 创建Mybatis的SeqSession -->
@@ -49,4 +49,11 @@
     <mvc:resources mapping="/css/**" location="/css/"/>
     <mvc:resources mapping="/fonts/**" location="/fonts/"/>
     <mvc:resources mapping="/images/**" location="/images/"/>
+
+    <mvc:interceptors>
+        <mvc:interceptor>
+            <mvc:mapping path="/**"/>
+            <bean class="com.demo.crm.interceptor.LoginInterceptor"/>
+        </mvc:interceptor>
+    </mvc:interceptors>
 </beans>
