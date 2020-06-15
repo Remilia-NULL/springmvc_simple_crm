@@ -42,4 +42,10 @@ public class UserController {
         httpSession.setAttribute("user", user);
         return "redirect:customer.html";
     }
+
+    @GetMapping("/logout.action")
+    public String logoutPage(HttpSession httpSession){
+        httpSession.invalidate();
+        return "redirect:login.html";
+    }
 }

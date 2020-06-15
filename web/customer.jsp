@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8" %>
 <%@ page trimDirectiveWhitespaces="true" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE HTML>
 <html>
 <head>
@@ -168,7 +169,7 @@
                 </a>
                 <ul class="dropdown-menu dropdown-user">
                     <li><a href="#"><i class="fa fa-user fa-fw"></i>
-                        用户：${USER_SESSION.user_name}
+                        用户：${user.user_name}
                     </a>
                     </li>
                     <li><a href="#"><i class="fa fa-gear fa-fw"></i> 系统设置</a></li>
@@ -275,7 +276,17 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <!--todo: 显示可供选择的客户来源，使用c标记 -->
+                            <c:forEach items="${customer}" var="customer">
+                                <tr>
+                                    <td>${customer.cust_id}</td>
+                                    <td>${customer.cust_name}</td>
+                                    <td>${customer.cust_source}</td>
+                                    <td>${customer.cust_industry}</td>
+                                    <td>${customer.cust_level}</td>
+                                    <td>${customer.cust_phone}</td>
+                                    <td>${customer.cust_mobile}</td>
+                                </tr>
+                            </c:forEach>
                         </tbody>
                     </table>
                     <div class="col-md-12 text-right">
