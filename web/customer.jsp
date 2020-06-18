@@ -276,21 +276,41 @@
                         </tr>
                         </thead>
                         <tbody>
-                            <c:forEach items="${customer}" var="customer">
-                                <tr>
-                                    <td>${customer.cust_id}</td>
-                                    <td>${customer.cust_name}</td>
-                                    <td>${customer.cust_source}</td>
-                                    <td>${customer.cust_industry}</td>
-                                    <td>${customer.cust_level}</td>
-                                    <td>${customer.cust_phone}</td>
-                                    <td>${customer.cust_mobile}</td>
-                                </tr>
-                            </c:forEach>
+                        <c:forEach items="${customer.rows}" var="customer">
+                            <tr>
+                                <td>${customer.cust_id}</td>
+                                <td>${customer.cust_name}</td>
+                                <td>${customer.cust_source}</td>
+                                <td>${customer.cust_industry}</td>
+                                <td>${customer.cust_level}</td>
+                                <td>${customer.cust_phone}</td>
+                                <td>${customer.cust_mobile}</td>
+                                <td><button class="btn-group-sm">修改</button><button class="btn-group-sm">删除</button></td>
+                            </tr>
+                        </c:forEach>
                         </tbody>
                     </table>
                     <div class="col-md-12 text-right">
                         <!--todo： 显示页码 -->
+                        <nav>
+                            <ul class="pagination">
+                                <c:if test="${customer.currentpage != 1}">
+                                    <li><a href="/customer.html?page=1">首页</a></li>
+                                </c:if>
+                                <c:forEach begin="1" end="${customer.pagenumber}" varStatus="status">
+                                    <c:if test="${customer.currentpage==status.index}">
+                                        <li class="active"><a>${status.index}</a></li>
+                                    </c:if>
+                                    <c:if test="${customer.currentpage != status.index}">
+                                        <li><a href="/customer.html?page=${status.index}">${status.index}</a>
+                                        </li>
+                                    </c:if>
+                                </c:forEach>
+                                <c:if test="${customer.currentpage != customer.pagenumber}">
+                                    <li><a href="/customer.html?page=${customer.pagenumber}">尾页</a></li>
+                                </c:if>
+                            </ul>
+                        </nav>
                     </div>
                     <!-- /.panel-body -->
                 </div>
