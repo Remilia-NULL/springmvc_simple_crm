@@ -3,11 +3,25 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.demo.crm.mapper.CustomerMapper">
-    <select id="selectCustomer" resultType="Customer">
+    <select id="selectCustomer" resultType="Customer" parameterType="Customer">
         SELECT cust_id,cust_name,cust_user_id,cust_create_id,bCustomer.dict_item_name AS cust_source,cCustomer.dict_item_name AS cust_industry,dCustomer.dict_item_name AS cust_level,cust_linkman,cust_phone,cust_mobile,cust_zipcode,cust_address,cust_createtime
         FROM customer AS aCustomer
         LEFT JOIN(SELECT * FROM base_dict WHERE dict_type_code="002") bCustomer ON aCustomer.cust_source=bCustomer.dict_id
         LEFT JOIN(SELECT * FROM base_dict  WHERE dict_type_code="001") cCustomer ON aCustomer.cust_industry=cCustomer.dict_id
         LEFT JOIN(SELECT * FROM base_dict WHERE dict_type_code="006") dCustomer ON aCustomer.cust_level=dCustomer.dict_id
+        <where>
+            <if test="cust_name != null and cust_name != '' ">
+                and cust_name like "%"#{cust_name}"%"
+            </if>
+            <if test="cust_source != null and cust_source != '' ">
+                and cust_source = #{cust_source}
+            </if>
+            <if test="cust_industry != null and cust_industry != '' ">
+                and cust_industry = #{cust_industry}
+            </if>
+            <if test="cust_level != null and cust_level != '' ">
+                and cust_level = #{cust_level}
+            </if>
+        </where>
     </select>
 </mapper>

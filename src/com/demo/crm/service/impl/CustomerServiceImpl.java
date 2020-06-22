@@ -15,8 +15,8 @@ public class CustomerServiceImpl implements CustomerService {
     CustomerMapper customerMapper;
 
     @Override
-    public Paging<Customer> selectCustomer(Integer page, Integer pagesize) {
-        List<Customer> customers = customerMapper.selectCustomer();
+    public Paging<Customer> selectCustomer(Integer page, Integer pagesize ,Customer customer) {
+        List<Customer> customers = customerMapper.selectCustomer(customer);
         return new Paging<Customer>(customers, page, pagesize);
     }
 }

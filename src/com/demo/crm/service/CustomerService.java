@@ -6,5 +6,5 @@ import com.demo.crm.until.Paging;
 import java.util.List;
 
 public interface CustomerService {
-    public Paging<Customer> selectCustomer(Integer page, Integer pagesize);
+    public Paging<Customer> selectCustomer(Integer page, Integer pagesize,Customer customer);
 }

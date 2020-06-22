@@ -26,7 +26,7 @@
         <!--连接数据库的url -->
         <property name="url" value="jdbc:mysql://localhost:3306/boot_crm"/>
         <!--连接数据库的用户名 -->
-        <property name="username" value="Spring"/>
+        <property name="username" value="root"/>
         <!--连接数据库的密码 -->
         <property name="password" value="123456789Abc="/>
     </bean>

@@ -224,31 +224,37 @@
         <div class="panel panel-default">
             <div class="panel-body">
                 <form class="form-inline" method="get"
-                      action="/customer/list.action">
+                      action="/customer.html">
                     <div class="form-group">
                         <label for="customerName">客户名称</label>
                         <input type="text" class="form-control" id="customerName"
-                               value="" name="custName"/>
+                               value="" name="cust_name" />
                     </div>
                     <div class="form-group">
                         <label for="customerFrom">客户来源</label>
-                        <select class="form-control" id="customerFrom" name="custSource">
+                        <select	class="form-control" id="customerFrom" name=cust_source>
                             <option value="">--请选择--</option>
-                            <!-- todo: 显示可供选择的客户来源，使用c标记 -->
+                            <c:forEach items="${ customerSource }" var="source">
+                                <option value="${ source.dict_id }">${ source.dict_item_name }</option>
+                            </c:forEach>
                         </select>
                     </div>
                     <div class="form-group">
                         <label for="custIndustry">所属行业</label>
-                        <select class="form-control" id="custIndustry" name="custIndustry">
+                        <select	class="form-control" id="custIndustry"  name="cust_industry">
                             <option value="">--请选择--</option>
-                            <!-- todo: 显示可供选择的客户来源，使用c标记 -->
+                            <c:forEach items="${ customerIndustry }" var="industry">
+                                <option value="${ industry.dict_id }">${ industry.dict_item_name }</option>
+                            </c:forEach>
                         </select>
                     </div>
                     <div class="form-group">
                         <label for="custLevel">客户级别</label>
-                        <select class="form-control" id="custLevel" name="custLevel">
+                        <select	class="form-control" id="custLevel" name="cust_level">
                             <option value="">--请选择--</option>
-                            <!-- todo: 显示可供选择的客户来源，使用c标记 -->
+                            <c:forEach items="${ customerLevel }" var="level">
+                                <option value="${ level.dict_id }">${ level.dict_item_name }</option>
+                            </c:forEach>
                         </select>
                     </div>
                     <button type="submit" class="btn btn-primary">查询</button>
@@ -285,7 +291,8 @@
                                 <td>${customer.cust_level}</td>
                                 <td>${customer.cust_phone}</td>
                                 <td>${customer.cust_mobile}</td>
-                                <td><button class="btn-group-sm">修改</button><button class="btn-group-sm">删除</button></td>
+                                <td><button class="btn btn-primary btn-xs">修改</button>
+                                    <button class="btn btn-danger btn-xs">删除</button></td>
                             </tr>
                         </c:forEach>
                         </tbody>

@@ -13,16 +13,29 @@ public class Paging<T> {
     private List<T> rows;// 当前页的所有行。
 
     public Paging(List<T> datas, Integer currentpage, Integer pagesize) {
+        if (datas == null || datas.size() == 0) {
+            currentpage = 1;
+            pagesize = 1;
+            indexpage = 1;
+            count = 0;
+            pagenumber = 0;
+            rows = null;
+            return;
+        }
+
+
         currentpage = currentpage < 1 ? 1 : currentpage;
         this.pagesize = pagesize;
         this.count = datas.size();
-        pagenumber = count % pagesize == 0 ? count / pagesize : count / pagesize;
-        currentpage = currentpage > pagenumber ? pagenumber : currentpage;
+        pagenumber = count % pagesize == 0 ? count / pagesize : ( count / pagesize ) + 1;
+        currentpage = currentpage > pagenumber ? pagenumber : currentpage ;
         this.currentpage = currentpage;
-        int begin = (currentpage - 1) * pagesize;
-        int end = currentpage * pagesize > count ? count : currentpage * pagesize;
+
+        int begin = (currentpage-1) * pagesize ;
+        int end = currentpage * pagesize > count ? count : currentpage * pagesize ;
+
         rows = new ArrayList<T>();
-        for (; begin < end; begin++) {
+        for( ; begin < end ; begin++) {
             rows.add(datas.get(begin));
         }
     }

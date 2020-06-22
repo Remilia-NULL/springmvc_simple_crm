@@ -5,5 +5,5 @@ import com.demo.crm.pojo.Customer;
 import java.util.List;
 
 public interface CustomerMapper {
-    public List<Customer> selectCustomer();
+    public List<Customer> selectCustomer(Customer customer);
 }
