@@ -19,4 +19,9 @@ public class CustomerServiceImpl implements CustomerService {
         List<Customer> customers = customerMapper.selectCustomer(customer);
         return new Paging<Customer>(customers, page, pagesize);
     }
+
+    @Override
+    public Integer insertCustomer(Customer customer) {
+        return customerMapper.insertCustomer(customer);
+    }
 }

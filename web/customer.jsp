@@ -228,32 +228,32 @@
                     <div class="form-group">
                         <label for="customerName">客户名称</label>
                         <input type="text" class="form-control" id="customerName"
-                               value="" name="cust_name" />
+                               value="" name="cust_name"/>
                     </div>
                     <div class="form-group">
                         <label for="customerFrom">客户来源</label>
-                        <select	class="form-control" id="customerFrom" name=cust_source>
+                        <select class="form-control" id="customerFrom" name=cust_source>
                             <option value="">--请选择--</option>
                             <c:forEach items="${ customerSource }" var="source">
-                                <option value="${ source.dict_id }">${ source.dict_item_name }</option>
+                                <option value="${ source.dict_id }" <c:if test="${custSource == source.dict_id}">selected</c:if>>${ source.dict_item_name }</option>
                             </c:forEach>
                         </select>
                     </div>
                     <div class="form-group">
                         <label for="custIndustry">所属行业</label>
-                        <select	class="form-control" id="custIndustry"  name="cust_industry">
+                        <select class="form-control" id="custIndustry" name="cust_industry">
                             <option value="">--请选择--</option>
                             <c:forEach items="${ customerIndustry }" var="industry">
-                                <option value="${ industry.dict_id }">${ industry.dict_item_name }</option>
+                                <option value="${ industry.dict_id }" <c:if test="${custIndustry == industry.dict_id}">selected</c:if>>${ industry.dict_item_name }</option>
                             </c:forEach>
                         </select>
                     </div>
                     <div class="form-group">
                         <label for="custLevel">客户级别</label>
-                        <select	class="form-control" id="custLevel" name="cust_level">
+                        <select class="form-control" id="custLevel" name="cust_level">
                             <option value="">--请选择--</option>
                             <c:forEach items="${ customerLevel }" var="level">
-                                <option value="${ level.dict_id }">${ level.dict_item_name }</option>
+                                <option value="${ level.dict_id }" <c:if test="${custLevel == level.dict_id}">selected</c:if>>${ level.dict_item_name }</option>
                             </c:forEach>
                         </select>
                     </div>
@@ -291,8 +291,10 @@
                                 <td>${customer.cust_level}</td>
                                 <td>${customer.cust_phone}</td>
                                 <td>${customer.cust_mobile}</td>
-                                <td><button class="btn btn-primary btn-xs">修改</button>
-                                    <button class="btn btn-danger btn-xs">删除</button></td>
+                                <td>
+                                    <button class="btn btn-primary btn-xs">修改</button>
+                                    <button class="btn btn-danger btn-xs">删除</button>
+                                </td>
                             </tr>
                         </c:forEach>
                         </tbody>
@@ -355,7 +357,9 @@
                         <div class="col-sm-10">
                             <select class="form-control" id="new_customerFrom" name="cust_source">
                                 <option value="">--请选择--</option>
-                                <!--todo: 显示可供选择的客户来源，使用c标记 -->
+                                <c:forEach items="${ customerSource }" var="source">
+                                    <option value="${ source.dict_id }">${ source.dict_item_name }</option>
+                                </c:forEach>
                             </select>
                         </div>
                     </div>
@@ -364,7 +368,9 @@
                         <div class="col-sm-10">
                             <select class="form-control" id="new_custIndustry" name="cust_industry">
                                 <option value="">--请选择--</option>
-                                <!--todo: 显示可供选择的客户来源，使用c标记 -->
+                                <c:forEach items="${ customerIndustry }" var="industry">
+                                    <option value="${ industry.dict_id }">${ industry.dict_item_name }</option>
+                                </c:forEach>
                             </select>
                         </div>
                     </div>
@@ -373,7 +379,9 @@
                         <div class="col-sm-10">
                             <select class="form-control" id="new_custLevel" name="cust_level">
                                 <option value="">--请选择--</option>
-                                <!--todo: 显示可供选择的客户来源，使用c标记 -->
+                                <c:forEach items="${ customerLevel }" var="level">
+                                    <option value="${ level.dict_id }">${ level.dict_item_name }</option>
+                                </c:forEach>
                             </select>
                         </div>
                     </div>
@@ -542,7 +550,7 @@
 
     // 创建客户
     function createCustomer() {
-        $.post("/customer/create.action",
+        $.post("/create.action",
             $("#new_customer_form").serialize(), function (data) {
                 if (data == "OK") {
                     alert("客户创建成功！");

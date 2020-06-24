@@ -9,6 +9,7 @@
         LEFT JOIN(SELECT * FROM base_dict WHERE dict_type_code="002") bCustomer ON aCustomer.cust_source=bCustomer.dict_id
         LEFT JOIN(SELECT * FROM base_dict  WHERE dict_type_code="001") cCustomer ON aCustomer.cust_industry=cCustomer.dict_id
         LEFT JOIN(SELECT * FROM base_dict WHERE dict_type_code="006") dCustomer ON aCustomer.cust_level=dCustomer.dict_id
+        ORDER BY cust_createtime DESC
         <where>
             <if test="cust_name != null and cust_name != '' ">
                 and cust_name like "%"#{cust_name}"%"
@@ -24,4 +25,21 @@
             </if>
         </where>
     </select>
+
+    <insert id="insertCustomer" parameterType="Customer">
+        insert into customer(cust_name,cust_create_id,cust_source,cust_industry,cust_level,cust_linkman,cust_phone,cust_mobile,cust_zipcode,cust_address,cust_createtime)
+		values(
+			#{cust_name},
+			#{cust_create_id},
+			#{cust_source},
+			#{cust_industry},
+			#{cust_level},
+			#{cust_linkman},
+			#{cust_phone},
+			#{cust_mobile},
+			#{cust_zipcode},
+			#{cust_address},
+			#{cust_createtime}
+		)
+    </insert>
 </mapper>
