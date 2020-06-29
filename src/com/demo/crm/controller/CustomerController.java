@@ -59,4 +59,27 @@ public class CustomerController {
         return "FALSE";
     }
 
+    @RequestMapping("/getCustomerById.action")
+    @ResponseBody
+    public Customer getCustomerByID(Integer id){
+        return customerService.selectCustomerByID(id);
+    }
+
+    @RequestMapping("/update.action")
+    @ResponseBody
+    public String updateCustomer(Customer customer){
+        if (customerService.updateCustomerByID(customer)>0){
+            return "OK";
+        }
+        return "false";
+    }
+
+    @RequestMapping("/delete.action")
+    @ResponseBody
+    public String delectCustomerByID(Integer id){
+        if (customerService.delectCustomerByID(id)>0){
+            return "OK";
+        }
+        return "false";
+    }
 }

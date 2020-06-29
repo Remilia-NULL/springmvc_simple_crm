@@ -24,4 +24,19 @@ public class CustomerServiceImpl implements CustomerService {
     public Integer insertCustomer(Customer customer) {
         return customerMapper.insertCustomer(customer);
     }
+
+    @Override
+    public Customer selectCustomerByID(Integer id) {
+        return customerMapper.selectCustomerByID(id);
+    }
+
+    @Override
+    public Integer updateCustomerByID(Customer customer) {
+        return customerMapper.updateCustomerByID(customer);
+    }
+
+    @Override
+    public Integer delectCustomerByID(Integer id) {
+        return customerMapper.delectCustomerByID(id);
+    }
 }

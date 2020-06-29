@@ -292,8 +292,8 @@
                                 <td>${customer.cust_phone}</td>
                                 <td>${customer.cust_mobile}</td>
                                 <td>
-                                    <button class="btn btn-primary btn-xs">修改</button>
-                                    <button class="btn btn-danger btn-xs">删除</button>
+                                    <a href="#" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#customerEditDialog" onclick= "editCustomer(${customer.cust_id})">修改</a>
+                                    <a href="#" class="btn btn-danger btn-xs" onclick="deleteCustomer(${customer.cust_id})">删除</a>
                                 </td>
                             </tr>
                         </c:forEach>
@@ -455,7 +455,9 @@
                         <div class="col-sm-10">
                             <select class="form-control" id="edit_customerFrom" name="cust_source">
                                 <option value="">--请选择--</option>
-                                <!--todo: 显示可供选择的客户来源，使用c标记 -->
+                                <c:forEach items="${ customerSource }" var="source">
+                                    <option value="${ source.dict_id }">${ source.dict_item_name }</option>
+                                </c:forEach>
                             </select>
                         </div>
                     </div>
@@ -464,7 +466,9 @@
                         <div class="col-sm-10">
                             <select class="form-control" id="edit_custIndustry" name="cust_industry">
                                 <option value="">--请选择--</option>
-                                <!--todo: 显示可供选择的客户来源，使用c标记 -->
+                                <c:forEach items="${ customerIndustry }" var="industry">
+                                    <option value="${ industry.dict_id }">${ industry.dict_item_name }</option>
+                                </c:forEach>
                             </select>
                         </div>
                     </div>
@@ -473,7 +477,9 @@
                         <div class="col-sm-10">
                             <select class="form-control" id="edit_custLevel" name="cust_level">
                                 <option value="">--请选择--</option>
-                                <!--todo: 显示可供选择的客户来源，使用c标记 -->
+                                <c:forEach items="${ customerLevel }" var="level">
+                                    <option value="${ level.dict_id }">${ level.dict_item_name }</option>
+                                </c:forEach>
                             </select>
                         </div>
                     </div>
@@ -566,7 +572,7 @@
     function editCustomer(id) {
         $.ajax({
             type: "get",
-            url: "/customer/getCustomerById.action",
+            url: "/getCustomerById.action",
             data: {"id": id},
             success: function (data) {
                 $("#edit_cust_id").val(data.cust_id);
@@ -586,7 +592,7 @@
 
     // 执行修改客户操作
     function updateCustomer() {
-        $.post("/customer/update.action", $("#edit_customer_form").serialize(), function (data) {
+        $.post("/update.action", $("#edit_customer_form").serialize(), function (data) {
             if (data == "OK") {
                 alert("客户信息更新成功！");
                 window.location.reload();
@@ -600,7 +606,7 @@
     // 删除客户
     function deleteCustomer(id) {
         if (confirm('确实要删除该客户吗?')) {
-            $.post("/customer/delete.action", {"id": id},
+            $.post("/delete.action", {"id": id},
                 function (data) {
                     if (data == "OK") {
                         alert("客户删除成功！");

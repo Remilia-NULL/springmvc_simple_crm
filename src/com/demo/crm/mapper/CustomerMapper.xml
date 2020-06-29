@@ -4,11 +4,16 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.demo.crm.mapper.CustomerMapper">
     <select id="selectCustomer" resultType="Customer" parameterType="Customer">
-        SELECT cust_id,cust_name,cust_user_id,cust_create_id,bCustomer.dict_item_name AS cust_source,cCustomer.dict_item_name AS cust_industry,dCustomer.dict_item_name AS cust_level,cust_linkman,cust_phone,cust_mobile,cust_zipcode,cust_address,cust_createtime
+        SELECT cust_id,cust_name,cust_user_id,cust_create_id,bCustomer.dict_item_name AS
+        cust_source,cCustomer.dict_item_name AS cust_industry,dCustomer.dict_item_name AS
+        cust_level,cust_linkman,cust_phone,cust_mobile,cust_zipcode,cust_address,cust_createtime
         FROM customer AS aCustomer
-        LEFT JOIN(SELECT * FROM base_dict WHERE dict_type_code="002") bCustomer ON aCustomer.cust_source=bCustomer.dict_id
-        LEFT JOIN(SELECT * FROM base_dict  WHERE dict_type_code="001") cCustomer ON aCustomer.cust_industry=cCustomer.dict_id
-        LEFT JOIN(SELECT * FROM base_dict WHERE dict_type_code="006") dCustomer ON aCustomer.cust_level=dCustomer.dict_id
+        LEFT JOIN(SELECT * FROM base_dict WHERE dict_type_code="002") bCustomer ON
+        aCustomer.cust_source=bCustomer.dict_id
+        LEFT JOIN(SELECT * FROM base_dict WHERE dict_type_code="001") cCustomer ON
+        aCustomer.cust_industry=cCustomer.dict_id
+        LEFT JOIN(SELECT * FROM base_dict WHERE dict_type_code="006") dCustomer ON
+        aCustomer.cust_level=dCustomer.dict_id
         ORDER BY cust_createtime DESC
         <where>
             <if test="cust_name != null and cust_name != '' ">
@@ -42,4 +47,55 @@
 			#{cust_createtime}
 		)
     </insert>
+
+    <select id="selectCustomerByID" resultType="Customer" parameterType="Integer">
+        SELECT * FROM customer WHERE cust_id=#{id}
+    </select>
+
+    <update id="updateCustomerByID" parameterType="Customer">
+        UPDATE customer
+        <set>
+            <if test="cust_name!=null">
+                cust_name=#{cust_name},
+            </if>
+            <if test="cust_user_id!=null">
+                cust_user_id=#{cust_user_id},
+            </if>
+            <if test="cust_create_id!=null">
+                cust_create_id=#{cust_create_id},
+            </if>
+            <if test="cust_source!=null">
+                cust_source=#{cust_source},
+            </if>
+            <if test="cust_industry!=null">
+                cust_industry=#{cust_industry},
+            </if>
+            <if test="cust_level!=null">
+                cust_level=#{cust_level},
+            </if>
+            <if test="cust_linkman!=null">
+                cust_linkman=#{cust_linkman},
+            </if>
+            <if test="cust_phone!=null">
+                cust_phone=#{cust_phone},
+            </if>
+            <if test="cust_mobile!=null">
+                cust_mobile=#{cust_mobile},
+            </if>
+            <if test="cust_zipcode!=null">
+                cust_zipcode=#{cust_zipcode},
+            </if>
+            <if test="cust_address!=null">
+                cust_address=#{cust_address},
+            </if>
+            <if test="cust_createtime!=null">
+                cust_createtime=#{cust_createtime},
+            </if>
+        </set>
+        WHERE cust_id=#{cust_id}
+    </update>
+
+    <delete id="delectCustomerByID" parameterType="Integer">
+        DELETE FROM customer WHERE cust_id=#{id}
+    </delete>
 </mapper>
